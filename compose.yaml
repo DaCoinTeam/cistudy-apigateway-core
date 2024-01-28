@@ -16,7 +16,7 @@ services:
       SERVICE_GRAPHQL_HOST: host.docker.internal
       SERVICE_GRAPHQL_PORT: 1804
     ports:
-      - 1803:1803 
+      - 3001:3001 
 
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to

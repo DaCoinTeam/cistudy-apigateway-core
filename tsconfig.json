@@ -18,6 +18,10 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
+      "@database": ["src/database"],
+      "@restful": ["src/restful"],
+      "@shared": ["src/shared"],
+      "@global": ["src/global"],
       "@graphql": ["src/graphql"],
       "@config": ["src/config"]
     }

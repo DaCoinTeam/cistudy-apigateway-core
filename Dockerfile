@@ -67,7 +67,7 @@ COPY --from=build /usr/src/cistudy-apigateway-core/dist ./dist
 USER node 
 
 # Expose the port that the application listens on.
-EXPOSE 1803
+EXPOSE 3001
 
 # Run the application.
 CMD npm run start:prod
