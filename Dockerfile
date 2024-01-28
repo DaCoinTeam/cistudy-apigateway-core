@@ -60,8 +60,8 @@ COPY package.json .
 COPY --from=deps /usr/src/cistudy-apigateway-core/node_modules ./node_modules
 COPY --from=build /usr/src/cistudy-apigateway-core/dist ./dist
 
-# allow node to read write ./dist
-RUN chown -R node:node ./dist
+# # allow node to read write ./dist
+# RUN chown -R node:node ./dist
 
 # Run the application as a non-root user.
 USER node 
