@@ -1,7 +1,11 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm"
 import SessionEntity from "./session.entity"
-import { UserRole } from "@shared"
-
+import PostCommentEntity from "./post-comment.entity"
+import PostLikeEntity from "./post-like.entity"
+import EnrolledEntity from "./enrolled-info.entity"
+import { UserKind, UserRole } from "@shared"
+import PostEntity from "./post.entity"
+import CourseEntity from "./course.entity"
 
 @Entity("user")
 export default class UserEntity {
@@ -52,11 +56,28 @@ export default class UserEntity {
 
   @Column({ type: "boolean", default: false })
       verified: boolean
-      
+
+  @Column({ type: "enum", enum: UserKind, default: UserKind.Local })
+      kind: UserKind
+
   @Column({ type: "varchar", length: 128, default: null })
       externalId: string
 
   @OneToMany(() => SessionEntity, (session) => session.user)
       sessions: SessionEntity[]
 
+  @OneToMany(() => PostCommentEntity, (postComment) => postComment.user)
+      postComments: PostCommentEntity[]
+
+  @OneToMany(() => PostLikeEntity, (postLike) => postLike.user)
+      postLikes: PostLikeEntity[]
+
+  @OneToMany(() => EnrolledEntity, (enrolled) => enrolled.user)
+      enrolledInfos: EnrolledEntity[]
+
+  @OneToMany(() => PostEntity, (post) => post.creator)
+      posts: PostEntity[]
+
+  @OneToMany(() => CourseEntity, (course) => course.creator)
+      courses: CourseEntity[]
 }

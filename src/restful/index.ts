@@ -1,3 +1,3 @@
-import { AuthRestfulModule } from "./auth"
+import RestfulModule from "./restful.module"
 
-export { AuthRestfulModule }
+export { RestfulModule }

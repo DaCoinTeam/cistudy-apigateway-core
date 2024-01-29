@@ -15,6 +15,23 @@ services:
       NODE_ENV: production
       SERVICE_GRAPHQL_HOST: host.docker.internal
       SERVICE_GRAPHQL_PORT: 1804
+
+      # mysql
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: 123456
+      MYSQL_SCHEMA: cistudy-apigateway
+      MYSQL_HOST: host.docker.internal
+      MYSQL_PORT: 3306
+
+      #JWT
+      SALT: starci
+      SECRET: starci
+      ACCESS_TOKEN_EXPIRY_TIME: 15m
+      REFRESH_TOKEN_EXPIRY_TIME: 30d
+
+      #APP
+      APP_URL: http://localhost:3001/
+      PORT: 3001
     ports:
       - 3001:3001 
 

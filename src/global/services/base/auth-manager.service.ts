@@ -3,7 +3,7 @@ import { SessionMySqlEntity } from "@database"
 import { Injectable, UnauthorizedException } from "@nestjs/common"
 import { JsonWebTokenError, JwtService } from "@nestjs/jwt"
 import { InjectRepository } from "@nestjs/typeorm"
-import { Payload, TokenType, AuthTokens, Response, UserRole } from "@shared"
+import { Payload, AuthTokens, AuthToken, Response, UserRole } from "@shared"
 import { Repository } from "typeorm"
 
 @Injectable()
@@ -36,18 +36,17 @@ export default class AuthManagerService {
 
     async generateToken<T extends PayloadLike>(
         data: T,
-        type: TokenType = TokenType.Access,
+        type: AuthToken = AuthToken.Access,
     ) {
-        const typeToExpiresIn: Record<TokenType, string> = {
-            [TokenType.Access]: jwtConfig().accessTokenExpiryTime,
-            [TokenType.Refresh]: jwtConfig().refreshTokenExpiryTime,
-            [TokenType.Verify]: jwtConfig().verifyTokenExpiryTime,
+        const typeToExpiresIn: Record<AuthToken, string> = {
+            [AuthToken.Access]: jwtConfig().accessTokenExpiryTime,
+            [AuthToken.Refresh]: jwtConfig().refreshTokenExpiryTime,
         }
         const expiresIn = typeToExpiresIn[type]
 
         const payload: PayloadLike = {
             userId: data.userId,
-            userRole: type === TokenType.Access ? data.userRole : undefined,
+            userRole: type === AuthToken.Access ? data.userRole : undefined,
             type,
         }
         
@@ -62,7 +61,7 @@ export default class AuthManagerService {
         clientId?: string,
     ): Promise<AuthTokens> {
         const accessToken = await this.generateToken(data)
-        const refreshToken = await this.generateToken(data, TokenType.Refresh)
+        const refreshToken = await this.generateToken(data, AuthToken.Refresh)
 
         if (clientId) {
             let found = await this.sessionMySqlRepository.findOneBy({
@@ -107,5 +106,5 @@ export default class AuthManagerService {
 interface PayloadLike {
   userId: string;
   userRole?: UserRole;
-  type?: TokenType;
+  type?: AuthToken;
 }
