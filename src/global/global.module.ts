@@ -1,21 +1,21 @@
 import { Global, Module } from "@nestjs/common"
-import { AuthManagerService } from "./base"
 import { JwtService } from "@nestjs/jwt"
 import { SessionMySqlEntity, UserMySqlEntity } from "@database"
 import { TypeOrmModule } from "@nestjs/typeorm"
+import { AuthManagerService } from "./services"
 
 @Global()
 @Module({
     imports: [TypeOrmModule.forFeature([SessionMySqlEntity, UserMySqlEntity])],
     exports: [
         //base
-        AuthManagerService,
         JwtService,
+        AuthManagerService,
     ],
     providers: [
         //base
-        AuthManagerService,
         JwtService,
+        AuthManagerService,
     ],
 })
-export default class GlobalServicesModule {}
+export default class GlobalModule {}

@@ -5,33 +5,16 @@ import { Module } from "@nestjs/common"
 import { ConfigModule } from "@nestjs/config"
 import { GraphQLModule } from "@nestjs/graphql"
 import { TypeOrmModule } from "@nestjs/typeorm"
-import { RestfulModule } from "@restful"
-import { GlobalServicesModule } from "@global"
-import { join } from "path"
-import { ClientsModule, Transport } from "@nestjs/microservices"
+import { ControllersModule } from "@controllers"
+import { GlobalModule } from "@global"
+import { GrpcServerExceptionFilter, GrpcToHttpInterceptor } from "nestjs-grpc-exceptions"
+import { APP_FILTER, APP_INTERCEPTOR } from "@nestjs/core"
 
 @Module({
     imports: [
         ConfigModule.forRoot({
             load: [appConfig, serviceConfig, databaseConfig],
         }),
-
-        ClientsModule.register([
-            {
-                name: "AUTH_PACKAGE",
-                transport: Transport.GRPC,
-                options: {
-                    package: "auth",
-                    protoPath: join(
-                        process.cwd(),
-                        "protos",
-                        "services",
-                        "auth",
-                        "auth.service.proto",
-                    ),
-                },
-            },
-        ]),
 
         TypeOrmModule.forRoot({
             type: "mysql",
@@ -60,11 +43,15 @@ import { ClientsModule, Transport } from "@nestjs/microservices"
         //         }),
         //     },
         // }),
-        
-        RestfulModule,
-        GlobalServicesModule,
+        GlobalModule,
+        ControllersModule,
     ],
     controllers: [],
-    providers: [],
+    providers: [
+        {
+            provide: APP_INTERCEPTOR,
+            useClass: GrpcToHttpInterceptor,
+        },
+    ],
 })
 export class AppModule {}

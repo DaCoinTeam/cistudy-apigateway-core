@@ -19,7 +19,7 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@database": ["src/database"],
-      "@restful": ["src/restful"],
+      "@controllers": ["src/controllers"],
       "@shared": ["src/shared"],
       "@global": ["src/global"],
       "@graphql": ["src/graphql"],

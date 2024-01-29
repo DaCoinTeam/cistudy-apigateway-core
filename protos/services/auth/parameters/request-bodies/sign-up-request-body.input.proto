@@ -2,10 +2,10 @@ syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
 
-message SignUpInput {
+message SignUpRequestBody {
     string email = 1;
     string password = 2;
     string firstName = 3;
     string lastName = 4;
-    google.protobuf.Timestamp birthdate = 5;
+    string birthdate = 5;
 }

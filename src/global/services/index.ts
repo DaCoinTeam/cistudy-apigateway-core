@@ -1,5 +1,3 @@
-export * from "./base"
+import AuthManagerService from "./auth-manager.service"
 
-import GlobalServicesModule from "./global-services.module"
-
-export { GlobalServicesModule }
+export { AuthManagerService }

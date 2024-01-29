@@ -7,18 +7,25 @@ import {
     UseGuards,
     Get,
     Inject,
+    Query,
 } from "@nestjs/common"
 import { ApiBearerAuth, ApiQuery, ApiTags } from "@nestjs/swagger"
-import {
-    SignInRequestBody,
-    SignUpRequestBody,
-    SignInInterceptor,
-} from "./shared"
+import { SignInRequestBody, SignUpRequestBody } from "./shared"
 import { ClientGrpc } from "@nestjs/microservices"
 import AuthService from "./auth.service"
-import { UserId, AuthInterceptor, JwtAuthGuard } from "../shared"
+import {
+    UserId,
+    AuthInterceptor,
+    JwtAuthGuard,
+    GenerateAuthTokensInterceptor,
+} from "../shared"
+import { UserMySqlEntity } from "@database"
 
 @ApiTags("Auth")
+@ApiQuery({
+    name: "clientId",
+    example: "4e2fa8d7-1f75-4fad-b500-454a93c78935",
+})
 @Controller("api/auth")
 export default class AuthController implements OnModuleInit {
     constructor(@Inject("AUTH_PACKAGE") private client: ClientGrpc) {}
@@ -28,40 +35,24 @@ export default class AuthController implements OnModuleInit {
         this.authService = this.client.getService<AuthService>("AuthService")
     }
 
-  //post - sign-in
-  @ApiQuery({
-      name: "clientId",
-      example: "4e2fa8d7-1f75-4fad-b500-454a93c78935",
-  })
   @Post("sign-in")
-  @UseInterceptors(SignInInterceptor)
+  @UseInterceptors(GenerateAuthTokensInterceptor<UserMySqlEntity>)
     async signIn(@Body() body: SignInRequestBody) {
         return this.authService.signIn(body)
     }
 
-  //post - sign-up
-  @ApiQuery({
-      name: "clientId",
-      example: "4e2fa8d7-1f75-4fad-b500-454a93c78935",
-  })
   @Post("sign-up")
-  @UseInterceptors(AuthInterceptor)
+  @UseInterceptors(GenerateAuthTokensInterceptor<UserMySqlEntity>)
   async signUp(@Body() body: SignUpRequestBody) {
       return this.authService.signUp(body)
   }
 
-  //post - verify-google-acess-token
-  //   @Get("sign-up")
-  //   @UseInterceptors(SignInInterceptor)
-  //   async verifyGoogleAccessToken(@Body() body: SignUpRequestBody) {
-  //       return this.authService.signUp(body)
-  //   }
+  @Get("verify-google-access-token")
+  @UseInterceptors(GenerateAuthTokensInterceptor)
+  async verifyGoogleAccessToken(@Query("token") token: string) {
+      return this.authService.verifyGoogleAccessToken({ token })
+  }
 
-  //get - init
-  @ApiQuery({
-      name: "clientId",
-      example: "4e2fa8d7-1f75-4fad-b500-454a93c78935",
-  })
   @ApiBearerAuth()
   @Get("init")
   @UseGuards(JwtAuthGuard)

@@ -40,4 +40,4 @@ import { AuthModule } from "./auth"
     controllers: [],
     providers: [],
 })
-export default class RestfulModule {}
+export default class ControllersModule {}

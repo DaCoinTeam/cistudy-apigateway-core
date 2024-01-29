@@ -7,17 +7,12 @@ import {
 import { AuthManagerService } from "@global"
 import { Observable, mergeMap } from "rxjs"
 import { AuthToken, Payload, Response } from "@shared"
-import { InjectRepository } from "@nestjs/typeorm"
-import { UserMySqlEntity } from "@database"
-import { Repository } from "typeorm"
 
 @Injectable()
 export default class AuthInterceptor<T extends object>
 implements NestInterceptor<T, Response<T>>
 {
     constructor(
-        @InjectRepository(UserMySqlEntity)
-        private readonly userMySqlRepository: Repository<UserMySqlEntity>,
         private readonly authManagerService: AuthManagerService) {}
 
     async intercept(
