@@ -3,7 +3,7 @@ import { SessionMySqlEntity } from "@database"
 import { Injectable, UnauthorizedException } from "@nestjs/common"
 import { JsonWebTokenError, JwtService } from "@nestjs/jwt"
 import { InjectRepository } from "@nestjs/typeorm"
-import { Payload, AuthTokens, AuthToken, Response, UserRole } from "@shared"
+import { Payload, AuthTokens, AuthToken, Response, UserRole } from "@common"
 import { Repository } from "typeorm"
 
 @Injectable()

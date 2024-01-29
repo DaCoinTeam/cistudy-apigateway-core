@@ -1,5 +1,5 @@
 import { createParamDecorator, ExecutionContext } from "@nestjs/common"
-import { Payload } from "@shared"
+import { Payload } from "@common"
 
 const UserId = createParamDecorator((_, ctx: ExecutionContext) : string => {
     const request = ctx.switchToHttp().getRequest()

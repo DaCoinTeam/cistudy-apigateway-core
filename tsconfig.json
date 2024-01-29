@@ -20,7 +20,7 @@
     "paths": {
       "@database": ["src/database"],
       "@controllers": ["src/controllers"],
-      "@shared": ["src/shared"],
+      "@common": ["src/common"],
       "@global": ["src/global"],
       "@graphql": ["src/graphql"],
       "@config": ["src/config"]

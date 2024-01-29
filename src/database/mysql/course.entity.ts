@@ -9,7 +9,7 @@ import {
 
 import PostEntity from "./post.entity"
 import EnrolledEntity from "./enrolled-info.entity"
-import { VerifiedStatus } from "@shared"
+import { VerifiedStatus } from "@common"
 import SectionEntity from "./section.entity"
 import UserEntity from "./user.entity"
 

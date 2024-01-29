@@ -17,6 +17,8 @@ import {
     UserMySqlEntity,
 } from "@database"
 import { AuthModule } from "./auth"
+import { CourseModule } from "./course"
+import { JwtStrategy } from "./shared"
 
 @Module({
     imports: [
@@ -36,8 +38,11 @@ import { AuthModule } from "./auth"
             PostCommentLikeMySqlEntity
         ]),
         AuthModule,
+        CourseModule
     ],
     controllers: [],
-    providers: [],
+    providers: [
+        JwtStrategy
+    ],
 })
 export default class ControllersModule {}

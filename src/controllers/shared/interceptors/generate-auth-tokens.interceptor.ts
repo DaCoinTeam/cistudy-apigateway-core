@@ -6,7 +6,7 @@ import {
 } from "@nestjs/common"
 import { AuthManagerService } from "@global"
 import { Observable, mergeMap } from "rxjs"
-import { Response } from "@shared"
+import { Response } from "@common"
 
 @Injectable()
 export default class GenerateAuthTokensInterceptor<T extends object>

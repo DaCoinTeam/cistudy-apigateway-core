@@ -7,8 +7,8 @@ import { GraphQLModule } from "@nestjs/graphql"
 import { TypeOrmModule } from "@nestjs/typeorm"
 import { ControllersModule } from "@controllers"
 import { GlobalModule } from "@global"
-import { GrpcServerExceptionFilter, GrpcToHttpInterceptor } from "nestjs-grpc-exceptions"
-import { APP_FILTER, APP_INTERCEPTOR } from "@nestjs/core"
+import { GrpcToHttpInterceptor } from "nestjs-grpc-exceptions"
+import { APP_INTERCEPTOR } from "@nestjs/core"
 
 @Module({
     imports: [
