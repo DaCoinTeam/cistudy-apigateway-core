@@ -1,12 +1,12 @@
 import { NestFactory } from "@nestjs/core"
 import { AppModule } from "./app.module"
-import { appConfig } from "./config"
+import { appConfig   } from "./config"
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger"
 
 const bootstrap = async () => {
     const app = await NestFactory.create(AppModule)
     app.enableCors()
-    
+
     const config = new DocumentBuilder()
         .setTitle("CiStudy API Gateway")
         .setDescription(

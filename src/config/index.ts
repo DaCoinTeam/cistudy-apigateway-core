@@ -1,6 +1,6 @@
 import appConfig from "./app.config"
-import serviceConfig from "./service.config"
+import servicesConfig from "./services.config"
 import jwtConfig from "./jwt.config"
 import databaseConfig from "./database.config"
 
-export { appConfig, serviceConfig, jwtConfig, databaseConfig }
+export { appConfig, servicesConfig, jwtConfig, databaseConfig }

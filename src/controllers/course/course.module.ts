@@ -18,23 +18,27 @@ import {
 } from "@database"
 import { ClientsModule, Transport } from "@nestjs/microservices"
 import { join } from "path"
+import { servicesConfig } from "@config"
+import { ConfigModule } from "@nestjs/config"
 
 @Module({
     imports: [
-        ClientsModule.register([
+        ClientsModule.registerAsync([
             {
                 name: "COURSE_PACKAGE",
-                transport: Transport.GRPC,
-                options: {
-                    package: "course",
-                    protoPath: join(
-                        process.cwd(),
-                        "protos",
-                        "services",
-                        "course",
-                        "course.service.proto",
-                    ),
-                },
+                imports: [ConfigModule],
+                useFactory: async () => ({
+                    transport: Transport.GRPC,
+                    options: {
+                        package: "course",
+                        protoPath: join(
+                            servicesConfig().restful.path,
+                            "protos",
+                            "services",
+                            "course",
+                            "course.service.proto",
+                        ),
+                    }}),
             },
         ]),
         TypeOrmModule.forFeature([

@@ -6,7 +6,8 @@ export default () => {
         },
         restful: {
             host: process.env.SERVICE_RESTFUL_HOST,
-            port: process.env.SERVICE_RESTFUL_PORT
+            port: process.env.SERVICE_RESTFUL_PORT,
+            path: process.env.SERVICE_RESTFUL_PATH
         }
     }
 }

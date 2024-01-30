@@ -1,4 +1,4 @@
-import { appConfig, databaseConfig, serviceConfig } from "@config"
+import { appConfig, databaseConfig, jwtConfig, servicesConfig } from "@config"
 import { ApolloGatewayDriverConfig, ApolloGatewayDriver } from "@nestjs/apollo"
 import { IntrospectAndCompose } from "@apollo/gateway"
 import { Module } from "@nestjs/common"
@@ -13,7 +13,7 @@ import { APP_INTERCEPTOR } from "@nestjs/core"
 @Module({
     imports: [
         ConfigModule.forRoot({
-            load: [appConfig, serviceConfig, databaseConfig],
+            load: [appConfig, servicesConfig, databaseConfig, jwtConfig],
         }),
 
         TypeOrmModule.forRoot({
@@ -37,7 +37,7 @@ import { APP_INTERCEPTOR } from "@nestjs/core"
         //             subgraphs: [
         //                 {
         //                     name: "graphql",
-        //                     url: `http://${serviceConfig().graphql.host}:${serviceConfig().graphql.port}/graphql`,
+        //                     url: `http://${servicesConfig().graphql.host}:${servicesConfig().graphql.port}/graphql`,
         //                 },
         //             ],
         //         }),

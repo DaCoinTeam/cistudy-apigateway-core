@@ -18,25 +18,30 @@ import {
 } from "@database"
 import { ClientsModule, Transport } from "@nestjs/microservices"
 import { join } from "path"
+import { servicesConfig } from "@config"
+import { ConfigModule } from "@nestjs/config"
 
 @Module({
     imports: [
-        ClientsModule.register([
-            {
+        ClientsModule.registerAsync(
+            [{
                 name: "AUTH_PACKAGE",
-                transport: Transport.GRPC,
-                options: {
-                    package: "auth",
-                    protoPath: join(
-                        process.cwd(),
-                        "protos",
-                        "services",
-                        "auth",
-                        "auth.service.proto",
-                    ),
-                },
-            },
-        ]),
+                imports: [ConfigModule],
+                useFactory: async () => ({
+                    transport: Transport.GRPC,
+                    options: {
+                        package: "auth",
+                        protoPath: join(
+                            servicesConfig().restful.path,
+                            "protos",
+                            "services",
+                            "auth",
+                            "auth.service.proto",
+                        ),
+                    },
+                })}
+            ]
+        ),
         TypeOrmModule.forFeature([
             SessionMySqlEntity,
             UserMySqlEntity,
