@@ -38,7 +38,8 @@ import { ConfigModule } from "@nestjs/config"
                             "course",
                             "course.service.proto",
                         ),
-                    }}),
+                    },
+                }),
             },
         ]),
         TypeOrmModule.forFeature([
