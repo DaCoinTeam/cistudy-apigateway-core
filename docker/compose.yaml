@@ -33,7 +33,6 @@ services:
       SERVICE_RESTFUL_PORT: 3002
       SERVICE_RESTFUL_PATH: D:\CiStudy\cistudy-service-restful
 
-
       #APP
       APP_URL: http://localhost:3001/
       PORT: 3001

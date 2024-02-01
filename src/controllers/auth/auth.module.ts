@@ -35,7 +35,7 @@ import { servicesConfig } from "@config"
                 useFactory: async () => ({
                     transport: Transport.GRPC,
                     options: {
-                        url: "0.0.0.0:3002",
+                        url: `${servicesConfig().restful.host}:${servicesConfig().restful.port}`,
                         package: "auth",
                         protoPath: join(
                             process.env.NODE_ENV === "production"
