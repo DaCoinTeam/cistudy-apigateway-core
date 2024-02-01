@@ -75,7 +75,7 @@ jobs:
       # Replace this with steps to deploy to users
       - run:
           name: deploy
-          command: 'npm run docker'
+          command: 'docker-compose -f docker/compose.yaml up --build'
 workflows:
   build-and-push:
     jobs:
