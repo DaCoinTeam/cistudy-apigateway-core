@@ -49,7 +49,7 @@ export default class AuthController implements OnModuleInit {
   }
 
   @Get("verify-google-access-token")
-  @UseInterceptors(GenerateAuthTokensInterceptor)
+  @UseInterceptors(AuthInterceptor<UserMySqlEntity>)
   async verifyGoogleAccessToken(@Query("token") token: string) {
       return this.authService.verifyGoogleAccessToken({ token })
   }
@@ -57,7 +57,7 @@ export default class AuthController implements OnModuleInit {
   @ApiBearerAuth()
   @Get("init")
   @UseGuards(JwtAuthGuard)
-  @UseInterceptors(AuthInterceptor)
+  @UseInterceptors(AuthInterceptor<UserMySqlEntity>)
   async init(@UserId() userId: string) {
       return this.authService.init({ userId })
   }

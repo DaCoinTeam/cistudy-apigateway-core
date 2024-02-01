@@ -20,6 +20,7 @@ import { ClientsModule, Transport } from "@nestjs/microservices"
 import { join } from "path"
 //import { servicesConfig } from "@config"
 import { ConfigModule } from "@nestjs/config"
+import { servicesConfig } from "@config"
 
 @Module({
     imports: [
@@ -37,8 +38,9 @@ import { ConfigModule } from "@nestjs/config"
                         url: "0.0.0.0:3002",
                         package: "auth",
                         protoPath: join(
-                            //servicesConfig().restful.path,
-                            process.cwd(),
+                            process.env.NODE_ENV === "production"
+                                ? process.cwd()
+                                : servicesConfig().restful.path,
                             "protos",
                             "services",
                             "auth",
