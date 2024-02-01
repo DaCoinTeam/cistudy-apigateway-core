@@ -7,8 +7,8 @@ import {
     Inject,
     UploadedFiles,
 } from "@nestjs/common"
-import { ApiBearerAuth, ApiConsumes, ApiQuery, ApiTags } from "@nestjs/swagger"
-import { CreateData } from "./shared"
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiQuery, ApiTags } from "@nestjs/swagger"
+import { CreateData, createSchema } from "./shared"
 import { ClientGrpc } from "@nestjs/microservices"
 import { UserId, AuthInterceptor, JwtAuthGuard, DataFromBody } from "../shared"
 import { UserMySqlEntity } from "@database"
@@ -32,6 +32,7 @@ export default class AuthController implements OnModuleInit {
 
   @ApiBearerAuth()
   @ApiConsumes("multipart/form-data")
+  @ApiBody({ schema: createSchema })
   @Post("create")
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(

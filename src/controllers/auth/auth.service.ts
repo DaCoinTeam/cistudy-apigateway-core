@@ -5,10 +5,14 @@ import {
     SignUpRequestBody,
     VerifyGoogleAccessTokenData,
 } from "./shared"
+import { MessageResponse } from "@common"
+import { Observable } from "rxjs"
 
 export default interface AuthService {
-  signIn(data: SignInRequestBody): Promise<UserMySqlEntity>;
-  signUp(data: SignUpRequestBody): Promise<string>;
-  verifyGoogleAccessToken(data: VerifyGoogleAccessTokenData): Promise<string>;
-  init(data: InitData): Promise<UserMySqlEntity>;
+  signIn(data: SignInRequestBody): Observable<UserMySqlEntity>;
+  signUp(data: SignUpRequestBody): Observable<MessageResponse>;
+  verifyGoogleAccessToken(
+    data: VerifyGoogleAccessTokenData,
+  ): Observable<MessageResponse>;
+  init(data: InitData): Observable<UserMySqlEntity>;
 }

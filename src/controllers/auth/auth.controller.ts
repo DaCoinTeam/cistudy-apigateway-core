@@ -30,6 +30,7 @@ import { UserMySqlEntity } from "@database"
 export default class AuthController implements OnModuleInit {
     constructor(@Inject("AUTH_PACKAGE") private client: ClientGrpc) {}
 
+    //authService là kết nối với server grpc
     private authService: AuthService
     onModuleInit() {
         this.authService = this.client.getService<AuthService>("AuthService")

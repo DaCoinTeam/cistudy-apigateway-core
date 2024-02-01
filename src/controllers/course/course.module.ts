@@ -30,6 +30,7 @@ import { ConfigModule } from "@nestjs/config"
                 useFactory: async () => ({
                     transport: Transport.GRPC,
                     options: {
+                        url: "0.0.0.0:3002",
                         package: "course",
                         protoPath: join(
                             servicesConfig().restful.path,

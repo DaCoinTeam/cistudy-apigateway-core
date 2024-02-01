@@ -23,6 +23,10 @@ import { ConfigModule } from "@nestjs/config"
 
 @Module({
     imports: [
+        //gateway là client vì gateway nó gọi request từ 1 server grpc
+        // nó là client, reigster
+        // tạo ra 1 kết nối với server cung cấp package auth với đường dẫn tới proto như dưới
+        // tao tạo kết nối giữa gateway này và thằng server ở dưới
         ClientsModule.registerAsync(
             [{
                 name: "AUTH_PACKAGE",
@@ -30,6 +34,7 @@ import { ConfigModule } from "@nestjs/config"
                 useFactory: async () => ({
                     transport: Transport.GRPC,
                     options: {
+                        url: "0.0.0.0:3002",
                         package: "auth",
                         protoPath: join(
                             servicesConfig().restful.path,

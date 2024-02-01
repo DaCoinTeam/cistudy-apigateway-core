@@ -1,9 +1,9 @@
-import { CourseMySqlEntity } from "@database"
+import { Observable } from "rxjs"
 import { CreateData } from "./shared"
-import { SerializableFormData, WithUserId } from "@common"
+import { MessageResponse, SerializableFormData, WithUserId } from "@common"
 
 export default interface CourseService {
   create(
     data: WithUserId<SerializableFormData<CreateData>>,
-  ): Promise<CourseMySqlEntity>;
+  ): Observable<MessageResponse>;
 }
