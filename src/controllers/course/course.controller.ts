@@ -44,10 +44,10 @@ export default class AuthController implements OnModuleInit {
     @DataFromBody() data: CreateData,
     @UploadedFiles() { files }: Files,
     ) {
-        const serializableFiles : SerializableFile[] = files.map(file => {
+        const serializableFiles : Array<SerializableFile> = files.map(file => {
             return {
                 fileName: file.originalname,
-                data: file.buffer
+                fileBody: file.buffer
             }
         })  
         return this.courseService.create({

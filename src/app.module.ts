@@ -27,22 +27,22 @@ import { APP_INTERCEPTOR } from "@nestjs/core"
             synchronize: false,
         }),
 
-        // GraphQLModule.forRoot<ApolloGatewayDriverConfig>({
-        //     driver: ApolloGatewayDriver,
-        //     server: {
-        //         playground: true
-        //     },
-        //     gateway: {
-        //         supergraphSdl: new IntrospectAndCompose({
-        //             subgraphs: [
-        //                 {
-        //                     name: "graphql",
-        //                     url: `http://${servicesConfig().graphql.host}:${servicesConfig().graphql.port}/graphql`,
-        //                 },
-        //             ],
-        //         }),
-        //     },
-        // }),
+        GraphQLModule.forRoot<ApolloGatewayDriverConfig>({
+            driver: ApolloGatewayDriver,
+            server: {
+                playground: true
+            },
+            gateway: {
+                supergraphSdl: new IntrospectAndCompose({
+                    subgraphs: [
+                        {
+                            name: "graphql",
+                            url: `http://${servicesConfig().graphql.host}:${servicesConfig().graphql.port}/graphql`,
+                        },
+                    ],
+                }),
+            },
+        }),
         GlobalModule,
         ControllersModule,
     ],

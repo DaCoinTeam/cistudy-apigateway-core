@@ -1,18 +1,18 @@
 import { UserMySqlEntity } from "@database"
 import {
-    InitData,
-    SignInRequestBody,
-    SignUpRequestBody,
-    VerifyGoogleAccessTokenData,
+    InitInput,
+    SignInInput,
+    SignUpInput,
+    VerifyGoogleAccessTokenInput,
 } from "./shared"
 import { MessageResponse } from "@common"
 import { Observable } from "rxjs"
 
 export default interface AuthService {
-  signIn(data: SignInRequestBody): Observable<UserMySqlEntity>;
-  signUp(data: SignUpRequestBody): Observable<MessageResponse>;
+  signIn(data: SignInInput): Observable<UserMySqlEntity>;
+  signUp(data: SignUpInput): Observable<MessageResponse>;
   verifyGoogleAccessToken(
-    data: VerifyGoogleAccessTokenData,
+    data: VerifyGoogleAccessTokenInput,
   ): Observable<MessageResponse>;
-  init(data: InitData): Observable<UserMySqlEntity>;
+  init(data: InitInput): Observable<UserMySqlEntity>;
 }

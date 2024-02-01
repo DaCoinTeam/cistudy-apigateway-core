@@ -10,7 +10,7 @@ import {
     Query,
 } from "@nestjs/common"
 import { ApiBearerAuth, ApiQuery, ApiTags } from "@nestjs/swagger"
-import { SignInRequestBody, SignUpRequestBody } from "./shared"
+import { SignInInput, SignUpInput } from "./shared"
 import { ClientGrpc } from "@nestjs/microservices"
 import AuthService from "./auth.service"
 import {
@@ -38,13 +38,13 @@ export default class AuthController implements OnModuleInit {
 
   @Post("sign-in")
   @UseInterceptors(GenerateAuthTokensInterceptor<UserMySqlEntity>)
-    async signIn(@Body() body: SignInRequestBody) {
+    async signIn(@Body() body: SignInInput) {
         return this.authService.signIn(body)
     }
 
   @Post("sign-up")
   @UseInterceptors(GenerateAuthTokensInterceptor<UserMySqlEntity>)
-  async signUp(@Body() body: SignUpRequestBody) {
+  async signUp(@Body() body: SignUpInput) {
       return this.authService.signUp(body)
   }
 
@@ -59,6 +59,6 @@ export default class AuthController implements OnModuleInit {
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(AuthInterceptor)
   async init(@UserId() userId: string) {
-      return await this.authService.init({ userId })
+      return this.authService.init({ userId })
   }
 }
