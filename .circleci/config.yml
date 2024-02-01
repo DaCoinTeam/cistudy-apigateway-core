@@ -70,19 +70,21 @@ jobs:
   deploy:
     # This is an example deploy job, not actually used by the workflow
     docker:
-      - image: starci183/cistudy:api-gateway
+      - image: arvindr226/alpine-ssh
     steps:
-      # Replace this with steps to deploy to users
-      - run:
-          name: deploy
-          command: 'docker-compose -f docker/compose.yaml up --build'
+      - checkout
+      - run: ssh -oStrictHostKeyChecking=no -v $USER@$IP "./deploy.sh"
 workflows:
   build-and-push:
     jobs:
       #- test-node
-      - deploy
-          # requires:
-          #   - test-node
+      - deploy:
+      filters:
+            branches:
+              only:
+                - circleci-project-setup
+        # requires:
+        #   - test-node
     # - deploy:
     #     requires:
     #       - build-node
