@@ -14,7 +14,7 @@ services:
     environment:
       NODE_ENV: production
       SERVICE_GRAPHQL_HOST: host.docker.internal
-      SERVICE_GRAPHQL_PORT: 1804
+      SERVICE_GRAPHQL_PORT: 3003
 
       # mysql
       MYSQL_USERNAME: root
@@ -28,6 +28,11 @@ services:
       SECRET: starci
       ACCESS_TOKEN_EXPIRY_TIME: 15m
       REFRESH_TOKEN_EXPIRY_TIME: 30d
+
+      SERVICE_RESTFUL_HOST: host.docker.internal
+      SERVICE_RESTFUL_PORT: 3002
+      SERVICE_RESTFUL_PATH: D:\CiStudy\cistudy-service-restful
+
 
       #APP
       APP_URL: http://localhost:3001/

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package course;
+
+import "./inputs/create.input.proto";
+import "../../dtos/course.dto.proto";
+import "../../base/message-response.base.proto";
+
+service CourseService {
+  rpc create(CreateInput) returns (MessageResponse) {}
+}
+
+
+

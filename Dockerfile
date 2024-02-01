@@ -54,6 +54,10 @@ ENV NODE_ENV production
 # Copy package.json so that package manager commands can be used.
 COPY package.json .
 
+#copy proto folder
+RUN mkdir -p /usr/src/cistudy-apigateway-core/protos
+COPY protos /usr/src/cistudy-apigateway-core/protos
+
 # Copy the production dependencies from the deps stage and also
 # the built application from the build stage into the image.
 
