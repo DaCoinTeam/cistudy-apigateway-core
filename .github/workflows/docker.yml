@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2  # Sử dụng action để checkout mã nguồn
+      uses: actions/checkout@v2 
 
     - name: Run Docker compose command
       run: docker compose up --build
