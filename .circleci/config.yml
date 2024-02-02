@@ -75,10 +75,15 @@ jobs:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: false
-      - run:
-          name: Build Docker image
+      - build:
           command: docker build -t cistudy-api-gateway . 
-          #& docker login -u cuongnvtse160875@fpt.edu.vn --password Cuong123_A & docker tag cistudy-api-gateway  starci183/cistudy & docker push starci183/cistudy
+      - login: 
+          command: docker login -u cuongnvtse160875@fpt.edu.vn --password Cuong123_A 
+      - tag:
+          command: docker tag cistudy-api-gateway starci183/cistudy
+      - push:
+          command: docker push starci183/cistudy
+
 
 workflows:
   build-and-push:
