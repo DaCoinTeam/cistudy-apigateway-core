@@ -76,9 +76,9 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: false
       - run: 
-        name: Build Docker image
-        command: |
-          docker build -t cistudy183/api-gateway:latest | docker push cistudy183/api-gateway:latest
+          name: Build Docker image
+          command: |
+            docker build -t cistudy183/api-gateway:latest | docker push cistudy183/api-gateway:latest
 workflows:
   build-and-push:
     jobs:
