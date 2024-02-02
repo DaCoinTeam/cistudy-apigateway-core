@@ -67,7 +67,7 @@ jobs:
       - store_artifacts:
           path: ~/artifacts
           destination: node-build
-  build-docker-image:
+  build-and-push-docker-image:
     # This is an example deploy job, not actually used by the workflow
     docker:
       - image: cimg/node:20.10.0
@@ -80,7 +80,7 @@ jobs:
           command: docker build -t cistudy-api-gateway . 
       - run: 
           name: Login to Docker with credentials
-          command: docker login -u cuongnvtse160875@fpt.edu.vn --password Cuong123_A 
+          command: docker login -u ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD} 
       - run:
           name: Tag image with remote repository
           command: docker tag cistudy-api-gateway starci183/cistudy
@@ -92,8 +92,7 @@ jobs:
 workflows:
   build-and-push:
     jobs:
-      #- test-node
-      - build-docker-image
+      - build-and-push-docker-image
         # filters:
         #   branches:
         #     only:
