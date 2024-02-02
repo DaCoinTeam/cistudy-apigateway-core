@@ -73,7 +73,7 @@ jobs:
     resource_class: starci/docker
     steps:
       - checkout
-      # - setup_remote_docker:
+      # - setup_remote_docker: 
       #     docker_layer_caching: false
       # - run:
       #     name: Build Docker imange
