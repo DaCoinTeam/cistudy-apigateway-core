@@ -83,7 +83,7 @@ workflows:
   build-and-push:
     jobs:
       #- test-node
-      - build-docker-image:
+      - build-node:
           filters:
             branches:
               only:
