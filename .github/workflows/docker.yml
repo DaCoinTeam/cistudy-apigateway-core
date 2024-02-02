@@ -1,0 +1,17 @@
+name: Compose Docker project
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  my_job:
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # Sử dụng action để checkout mã nguồn
+
+    - name: Run Docker compose command
+      run: docker compose up --build
