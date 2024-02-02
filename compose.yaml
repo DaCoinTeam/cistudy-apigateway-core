@@ -19,9 +19,9 @@ services:
       # mysql
       MYSQL_USERNAME: root
       MYSQL_PASSWORD: 123456
-      MYSQL_SCHEMA: cistudy-apigateway
+      MYSQL_SCHEMA: cistudy
       MYSQL_HOST: host.docker.internal
-      MYSQL_PORT: 3306
+      MYSQL_PORT: 3307
 
       #JWT
       SALT: starci

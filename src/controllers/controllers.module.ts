@@ -19,6 +19,7 @@ import {
 import { AuthModule } from "./auth"
 import { CourseModule } from "./course"
 import { JwtStrategy } from "./shared"
+import { PostModule } from "./post"
 
 @Module({
     imports: [
@@ -38,7 +39,8 @@ import { JwtStrategy } from "./shared"
             PostCommentLikeMySqlEntity
         ]),
         AuthModule,
-        CourseModule
+        CourseModule,
+        PostModule
     ],
     controllers: [],
     providers: [
