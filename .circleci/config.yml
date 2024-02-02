@@ -69,24 +69,29 @@ jobs:
           destination: node-build
   build-and-push-docker-image:
     # This is an example deploy job, not actually used by the workflow
+    machine: true
+    resource_class: starci/docker
     docker:
       - image: cimg/node:20.10.0
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: false
+      # - setup_remote_docker:
+      #     docker_layer_caching: false
+      # - run:
+      #     name: Build Docker imange
+      #     command: docker build -t cistudy-api-gateway . 
+      # - run: 
+      #     name: Login to Docker with credentials
+      #     command: docker login -u ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD} 
+      # - run:
+      #     name: Tag image with remote repository
+      #     command: docker tag cistudy-api-gateway:latest starci183/cistudy:api-gateway
+      # - run:
+      #     name: Push image to Dockerhub
+      #     command: docker push starci183/cistudy:api-gateway
       - run:
-          name: Build Docker imange
-          command: docker build -t cistudy-api-gateway . 
-      - run: 
-          name: Login to Docker with credentials
-          command: docker login -u ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD} 
-      - run:
-          name: Tag image with remote repository
-          command: docker tag cistudy-api-gateway:latest starci183/cistudy:api-gateway
-      - run:
-          name: Push image to Dockerhub
-          command: docker push starci183/cistudy:api-gateway
+          name: Test Echo
+          command: echo "Hi I'm on Runners!"
 
 
 workflows:
