@@ -83,10 +83,10 @@ jobs:
           command: docker login -u ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD} 
       - run:
           name: Tag image with remote repository
-          command: docker tag cistudy-api-gateway:latest starci183/cistudy
+          command: docker tag cistudy-api-gateway:latest starci183/cistudy:api-gateway
       - run:
           name: Push image to Dockerhub
-          command: docker push starci183/cistudy
+          command: docker push starci183/cistudy:api-gateway
 
 
 workflows:
