@@ -71,8 +71,6 @@ jobs:
     # This is an example deploy job, not actually used by the workflow
     machine: true
     resource_class: starci/docker
-    docker:
-      - image: cimg/node:20.10.0
     steps:
       - checkout
       # - setup_remote_docker:
@@ -89,9 +87,7 @@ jobs:
       # - run:
       #     name: Push image to Dockerhub
       #     command: docker push starci183/cistudy:api-gateway
-      - run:
-          name: Test Echo
-          command: echo "Hi I'm on Runners!"
+      - run: echo "Hi I'm on Runners!"
 
 
 workflows:
