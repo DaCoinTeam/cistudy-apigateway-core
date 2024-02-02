@@ -8,10 +8,6 @@
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
 services:
-  watchtower:
-    image: containrrr/watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
   server:
     build:
       context: .
@@ -42,8 +38,6 @@ services:
       PORT: 3001
     ports:
       - 3001:3001 
-    depends_on:
-      - watchtower
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to
 # start the database before your application. The `db-data` volume persists the
