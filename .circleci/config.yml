@@ -83,11 +83,11 @@ workflows:
   build-and-push:
     jobs:
       #- test-node
-      - build-node:
-          filters:
-            branches:
-              only:
-                - circleci-project-setup
+      - build-node
+          # filters:
+          #   branches:
+          #     only:
+          #       - circleci-project-setup
         # requires:
         #   - test-node
     # - deploy:
