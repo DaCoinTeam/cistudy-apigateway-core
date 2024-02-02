@@ -92,7 +92,7 @@ jobs:
 workflows:
   build-and-push:
     jobs:
-      - build-and-push-docker-image
+      - build-and-push-docker-image:
           filters:
             branches:
               only:
