@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  my_job:
+  docker-compose:
     runs-on: self-hosted
 
     steps:
@@ -14,4 +14,5 @@ jobs:
       uses: actions/checkout@v2  # Sử dụng action để checkout mã nguồn
 
     - name: Run Docker compose command
-      run: docker compose up --build
+      run: |
+      docker compose up --build
