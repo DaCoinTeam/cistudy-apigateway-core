@@ -56,4 +56,31 @@ export default class PostController implements OnModuleInit {
             files : serializableFiles,
         })
     }
+
+    @ApiBearerAuth()
+  @ApiConsumes("multipart/form-data")
+  @ApiBody({ schema: createSchema })
+  @Post("create2")
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(
+    AuthInterceptor<UserMySqlEntity>,
+    FileFieldsInterceptor([{ name: "files", maxCount: 2 }]),
+  )
+  async create2(
+    @UserId() userId: string,
+    @DataFromBody() data: CreateData,
+    @UploadedFiles() { files }: Files,
+  ) {
+      const serializableFiles : Array<SerializableFile> = files.map(file => {
+          return {
+              fileName: file.originalname,
+              fileBody: file.buffer
+          }
+      })  
+      return this.courseService.create({
+          userId,
+          data,
+          files : serializableFiles,
+      })
+  }
 }
