@@ -6,9 +6,10 @@ import {
     UseGuards,
     Inject,
     UploadedFiles,
+    Body,
 } from "@nestjs/common"
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiQuery, ApiTags } from "@nestjs/swagger"
-import { CreateData, createSchema } from "./shared"
+import { CreateCourseData, createCourseSchema, CreateLectureData, createLectureSchema, CreateSectionData } from "./shared"
 import { ClientGrpc } from "@nestjs/microservices"
 import { UserId, AuthInterceptor, JwtAuthGuard, DataFromBody } from "../shared"
 import { UserMySqlEntity } from "@database"
@@ -23,37 +24,80 @@ import { FileFieldsInterceptor } from "@nestjs/platform-express"
 })
 @Controller("api/course")
 export default class AuthController implements OnModuleInit {
-    constructor(@Inject("COURSE_PACKAGE") private client: ClientGrpc) {}
+    constructor(@Inject("COURSE_PACKAGE") private client: ClientGrpc) { }
 
     private courseService: CourseService
     onModuleInit() {
         this.courseService = this.client.getService<CourseService>("CourseService")
     }
 
-  @ApiBearerAuth()
-  @ApiConsumes("multipart/form-data")
-  @ApiBody({ schema: createSchema })
-  @Post("create")
-  @UseGuards(JwtAuthGuard)
-  @UseInterceptors(
-    AuthInterceptor<UserMySqlEntity>,
-    FileFieldsInterceptor([{ name: "files", maxCount: 2 }]),
-  )
-    async create(
-    @UserId() userId: string,
-    @DataFromBody() data: CreateData,
-    @UploadedFiles() { files }: Files,
+    @ApiBearerAuth()
+    @ApiConsumes("multipart/form-data")
+    @ApiBody({ schema: createCourseSchema })
+    @Post("create-course")
+    @UseGuards(JwtAuthGuard)
+    @UseInterceptors(
+        AuthInterceptor<UserMySqlEntity>,
+        FileFieldsInterceptor([{ name: "files", maxCount: 2 }]),
+    )
+    async createCourse(
+        @UserId() userId: string,
+        @DataFromBody() data: CreateCourseData,
+        @UploadedFiles() { files }: Files,
     ) {
-        const serializableFiles : Array<SerializableFile> = files.map(file => {
+        const serializableFiles: Array<SerializableFile> = files.map(file => {
             return {
                 fileName: file.originalname,
                 fileBody: file.buffer
             }
-        })  
-        return this.courseService.create({
+        })
+        return this.courseService.createCourse({
             userId,
             data,
-            files : serializableFiles,
+            files: serializableFiles,
+        })
+    }
+
+    @ApiBearerAuth()
+    @Post("create-section")
+    @UseGuards(JwtAuthGuard)
+    @UseInterceptors(
+        AuthInterceptor<UserMySqlEntity>,
+    )
+    async createSection(
+        @UserId() userId: string,
+        @Body() body: CreateSectionData
+    ) {
+        return this.courseService.createSection({
+            userId,
+            data: body
+        })
+    }
+
+    @ApiBearerAuth()
+    @ApiConsumes("multipart/form-data")
+    @ApiBody({ schema: createLectureSchema })
+    @Post("create-lecture")
+    @UseGuards(JwtAuthGuard)
+    @UseInterceptors(
+        AuthInterceptor<UserMySqlEntity>,
+        FileFieldsInterceptor([{ name: "files", maxCount: 1 }]),
+    )
+    async createLecture(
+        @UserId() userId: string,
+        @DataFromBody() data: CreateLectureData,
+        @UploadedFiles() { files }: Files,
+    ) {
+        const serializableFiles: Array<SerializableFile> = files.map(file => {
+            return {
+                fileName: file.originalname,
+                fileBody: file.buffer
+            }
+        })
+        return this.courseService.createLecture({
+            userId,
+            data,
+            files: serializableFiles
         })
     }
 }

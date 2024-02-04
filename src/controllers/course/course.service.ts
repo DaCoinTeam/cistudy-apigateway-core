@@ -1,9 +1,16 @@
 import { Observable } from "rxjs"
-import { CreateData } from "./shared"
-import { MessageResponse, SerializableFormData, WithUserId } from "@common"
+import { CreateCourseInput, CreateLectureInput, CreateSectionInput } from "./shared"
+import { MessageResponse } from "@common"
 
 export default interface CourseService {
-  create(
-    data: WithUserId<SerializableFormData<CreateData>>,
+  createCourse(
+    input: CreateCourseInput,
   ): Observable<MessageResponse>;
-}
+  createSection(
+    input: CreateSectionInput
+  ) : Observable<MessageResponse>;
+  createLecture(
+    input: CreateLectureInput
+  ) : Observable<MessageResponse>;
+} 
+ 

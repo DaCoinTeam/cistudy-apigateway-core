@@ -5,6 +5,7 @@ import SerializableFormData from "./serializable-form-data.interface"
 import Files from "./files.interface"
 import SerializableFile from "./serializable-file.interface"
 import MessageResponse from "./message-response.interface"
+import DataWithUserId from "./data-with-user-id.interface"
 
 export {
     SerializableFile,
@@ -14,4 +15,5 @@ export {
     SerializableFormData,
     Files,
     MessageResponse,
+    DataWithUserId
 }

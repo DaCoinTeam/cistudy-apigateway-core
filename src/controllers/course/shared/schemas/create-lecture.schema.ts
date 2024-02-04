@@ -1,6 +1,6 @@
 import { SchemaObject } from "@nestjs/swagger/dist/interfaces/open-api-spec.interface"
 
-const createSchema : SchemaObject = {
+const createLectureSchema : SchemaObject = {
     type: "object",
     properties: {
         data: {
@@ -9,12 +9,6 @@ const createSchema : SchemaObject = {
                 title: {
                     type: "string",
                 },
-                description: {
-                    type: "string",
-                },
-                price: {
-                    type: "number"
-                }
             },
         },
         files: {
@@ -27,4 +21,4 @@ const createSchema : SchemaObject = {
     }
 }
 
-export default createSchema
+export default createLectureSchema
