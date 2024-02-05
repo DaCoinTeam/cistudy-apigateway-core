@@ -93,11 +93,12 @@ export default class AuthController implements OnModuleInit {
                 fileName: file.originalname,
                 fileBody: file.buffer
             }
-        })
+        })    
+        
         return this.courseService.createLecture({
             userId,
             data,
             files: serializableFiles
-        })
+        }) 
     }
 }
