@@ -108,6 +108,6 @@ export default class PostController implements OnModuleInit {
             userId,
             data,
             files : serializableFiles,
-        })
-    }
+        })  
+    }             
 }

@@ -22,7 +22,7 @@ export default class AuthManagerService {
                 throw new UnauthorizedException("Invalid token.")
             }
         }
-    }
+    } 
 
     async validateSession(userId: string, clientId: string): Promise<void> {
         const session = await this.sessionMySqlRepository.findOneBy({

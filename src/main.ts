@@ -22,6 +22,6 @@ const bootstrap = async () => {
     })
     
     await app.listen(3001 || appConfig().port)
-}
+}   
 
 bootstrap()
