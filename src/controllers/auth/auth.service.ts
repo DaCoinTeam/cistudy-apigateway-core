@@ -15,4 +15,4 @@ export default interface AuthService {
     data: VerifyGoogleAccessTokenInput,
   ): Observable<MessageResponse>;
   init(data: InitInput): Observable<UserMySqlEntity>;
-}
+}     
